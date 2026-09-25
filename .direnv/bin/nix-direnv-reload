@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+if [[ ! -d "/home/crocus/src/siokonbu/kri_rss" ]]; then
+  echo "Cannot find source directory; Did you move it?"
+  echo "(Looking for "/home/crocus/src/siokonbu/kri_rss")"
+  echo 'Cannot force reload with this script - use "direnv reload" manually and then try again'
+  exit 1
+fi
+
+# rebuild the cache forcefully
+_nix_direnv_force_reload=1 direnv exec "/home/crocus/src/siokonbu/kri_rss" true
+
+# Update the mtime for .envrc.
+# This will cause direnv to reload again - but without re-building.
+touch "/home/crocus/src/siokonbu/kri_rss/.envrc"
+
+# Also update the timestamp of whatever profile_rc we have.
+# This makes sure that we know we are up to date.
+touch -r "/home/crocus/src/siokonbu/kri_rss/.envrc" "/home/crocus/src/siokonbu/kri_rss/.direnv"/*.rc

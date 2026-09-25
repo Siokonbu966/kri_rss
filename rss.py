@@ -31,7 +31,6 @@ for item in items:
     if date_tag is None:
         continue
     date = date_tag.get_text(strip=True)
-    print(date, title, link)
 # generate xml
     fe = fg.add_entry()
     fe.title(title)

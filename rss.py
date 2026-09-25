@@ -14,8 +14,6 @@ fg.title("けいはんな_ニュース・イベント")
 fg.link(href=url)
 fg.description("kri_rss")
 
-path = './response.txt'
-
 # 取得したhtmlをパース
 soup = BeautifulSoup(response.text, "html.parser")
 items = soup.select("div.news-item")
@@ -39,13 +37,5 @@ for item in items:
     fe.title(title)
     fe.link(href=link)
 
-print(response.status_code)
 os.path.join("feed.xml")
 fg.rss_file("feed.xml")
-
-# response write to file
-os.path.join(path)
-
-with open(path, mode='w') as f:
-    f.write(cleaned)
-
